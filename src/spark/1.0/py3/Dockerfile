@@ -16,7 +16,7 @@ RUN curl -SsL https://aws-glue-etl-artifacts.s3.amazonaws.com/glue-1.0/spark-2.4
 RUN git clone --depth 1 -b glue-1.0 --single-branch https://github.com/webysther/aws-glue-libs.git /opt/aws-glue-libs
 
 # Python
-FROM python:3.6.9-slim-buster
+FROM python:3.7.4-slim-buster
 COPY --from=spark /usr/local/openjdk-8 /usr/local/openjdk-8
 COPY --from=spark /opt/spark-2.4.3-bin-spark-2.4.3-bin-hadoop2.8 /opt/spark-2.4.3-bin-spark-2.4.3-bin-hadoop2.8
 COPY --from=spark /opt/apache-maven-3.6.0 /opt/apache-maven-3.6.0

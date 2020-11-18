@@ -1,0 +1,22 @@
+version: '2'
+services:
+  zeppelin:
+    image: test/zeppelin-glue:1.0
+    ports:
+      - "9090:9090"
+  spark-master:
+    image: webysther/aws-glue:spark-py3
+    container_name: spark-master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    command: "/bin/bash $SPARK_HOME/sbin/start-master.sh"
+  spark-worker-1:
+    image: webysther/aws-glue:spark-py3
+    container_name: spark-worker-1
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
